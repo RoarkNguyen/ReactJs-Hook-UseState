@@ -1,5 +1,4 @@
 import logo from "./logo.svg";
-import "./app.scss";
 import Colorbox from "./components/ColorBox/Colorbox";
 
 function App() {

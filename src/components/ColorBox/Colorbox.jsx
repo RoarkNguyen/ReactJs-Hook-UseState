@@ -1,29 +1,40 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
+import "./style.scss";
 
 Colorbox.propTypes = {};
 
+function getRandomColor() {
+  const COLOR_LIST = ["deeppink", "green", "yellow", "black", "blue"];
+  const randomIndex = Math.trunc(Math.random() * 5);
+  return COLOR_LIST[randomIndex];
+}
+
 function Colorbox(props) {
-  const [color, setColor] = useState("green");
-  function handleColorRed() {
-    console.log("red");
-    setColor("red");
+  const [color, setColor] = useState(() => {
+    const initColor = localStorage.getItem("box_color") || "deeppink";
+    console.log("initColor", initColor);
+
+    return initColor;
+  });
+  function handleBoxClick() {
+    //get random color => set color
+    const newColor = getRandomColor();
+    setColor(newColor);
+    localStorage.setItem("box_color", newColor);
   }
-  function handleColorYellow() {
-    setColor("yellow");
-  }
-  function handleColorGreen() {
-    setColor("Green");
-  }
+
   return (
     <div>
-      <Box bg={color} w="100%" p={4} color="white">
+      <Box className="colorBox" bg={color} w="100%" p={4} color="white">
         This is the Box {color}
       </Box>
-      <Box onClick={handleColorRed}>Change Red</Box>
-      <Box onClick={handleColorYellow}>Change Yellow</Box>
-      <Box onClick={handleColorGreen}>Change Green</Box>
+      <Box>
+        <Button className="button" onClick={handleBoxClick}>
+          Radom Color
+        </Button>
+      </Box>
     </div>
   );
 }
