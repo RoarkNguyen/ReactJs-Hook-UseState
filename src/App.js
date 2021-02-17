@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Pagination from "./components/Pagination";
 import queryString from "query-string";
 import PostList from "./components/PostList";
+import PostFilterForm from "./components/PostFilterForm";
 
 function App() {
   const [postList, setPostList] = useState([{ id: 1, title: "hihi" }]);
@@ -42,11 +43,20 @@ function App() {
       _page: newPage,
     });
   }
+  function HandleFilterFormChange(formValues) {
+    console.log("haha", formValues);
+    setFilters({
+      ...filters,
+      _page: 1,
+      title_like: formValues.searchTerm,
+    });
+  }
 
   return (
     <div className="app">
       <div>Welcome to study React Hook</div>
       <div>React Hooks - Posts List</div>
+      <PostFilterForm onSubmit={HandleFilterFormChange} />
       <PostList posts={postList} />
       <Pagination pagination={pagination} onPageChange={handlePageChange} />
     </div>
