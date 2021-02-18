@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import Pagination from "./components/Pagination";
 import queryString from "query-string";
-import PostList from "./components/PostList";
-import PostFilterForm from "./components/PostFilterForm";
 import Clock from "./components/Clock";
 
 function App() {
